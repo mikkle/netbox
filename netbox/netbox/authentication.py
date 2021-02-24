@@ -127,6 +127,9 @@ class RemoteUserBackend(_RemoteUserBackend):
         if permissions_list:
             logger.debug(f"Assigned permissions to remotely-authenticated user {user}: {permissions_list}")
 
+        user.set_unusable_password()
+        user.save()
+
         return user
 
     def has_perm(self, user_obj, perm, obj=None):
